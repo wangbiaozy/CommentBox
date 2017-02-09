@@ -1,0 +1,30 @@
+module.exports = {
+    entry:'./app/index.js',//指定入口文件
+    output:{//指定输出的文件名和路径
+        path:'./build',//指定打包后的文件保存在哪个目录下
+        filename:'bundle.js'//指的是打包后的文件叫什么名字
+    },
+    devServer:{
+        inline:true,//指定当源码改变之后重新自动打包,自动刷新浏览器
+        port:8080,//指定端口号
+        contentBase:'./build'//指定静态文件根目录
+    },
+    //设置模块打包器
+    module:{
+        loaders:[//设置各种加载器
+            {
+                test:/\.js$/,//针对以.js结尾的文件
+                loader:'babel',//使用babel进行转译
+                exclude:/node_modules/ //排除掉node_modules
+            },
+            {
+                test:/\.css$/,
+                loader:'style!css'
+            },
+            {
+                test:/\.(eot|svg|ttf|woff2|woff)/,
+                loader:'url'
+            }
+        ]
+    }
+};
